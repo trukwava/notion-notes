@@ -1,4 +1,4 @@
-# Pagepad Backend: A Guide for Everyone
+# Notion Notes Backend: A Guide for Everyone
 
 This guide explains everything we built. It uses easy words and short sentences. It compares hard ideas to things you already know, like restaurants and filing cabinets.
 
@@ -6,13 +6,13 @@ If a word looks scary, it is probably in the **Glossary** at the end. You can lo
 
 ---
 
-## Part 1: What is Pagepad?
+## Part 1: What is Notion Notes?
 
-Pagepad is an app for writing. It opens in your web browser, like a website. You can make pages. You can write on each page. The app saves what you wrote. When you come back later, your writing is still there.
+Notion Notes is an app for writing. It opens in your web browser, like a website. You can make pages. You can write on each page. The app saves what you wrote. When you come back later, your writing is still there.
 
 It is like a notebook that lives on the computer. The notebook has many pages. Each page has a name. You can see all your pages on the side, like tabs in a binder.
 
-Pagepad is for people who think other writing apps are too hard. Some apps make you set up a lot of stuff before you even write one word. Pagepad lets you start writing right away.
+Notion Notes is for people who think other writing apps are too hard. Some apps make you set up a lot of stuff before you even write one word. Notion Notes lets you start writing right away.
 
 ---
 
@@ -26,7 +26,7 @@ The part you see (table, menu, waiter) is called the **frontend**.
 
 The part you do not see (kitchen, cook) is called the **backend**.
 
-Pagepad has both parts. The frontend is the website. It has buttons. It has the side panel of pages. It has the place where you type. When you click "make a new page," the frontend sends a message to the backend.
+Notion Notes has both parts. The frontend is the website. It has buttons. It has the side panel of pages. It has the place where you type. When you click "make a new page," the frontend sends a message to the backend.
 
 The backend is the kitchen. It does the real work. It saves your page. It remembers who you are. It checks if you are allowed to make a new page.
 
@@ -70,7 +70,7 @@ There are many tools like Hono. We picked Hono because it is small. It does not 
 
 SQLite is where we keep the data. It is a kind of **database**. A database is like a filing cabinet with folders inside it. Each folder is a kind of thing, like "users" or "pages." Inside each folder are cards. Each card has facts on it.
 
-SQLite is special because it is just one file on the computer. Other databases need their own server, like a big machine that does nothing else. SQLite is small and simple. For Pagepad, that is plenty.
+SQLite is special because it is just one file on the computer. Other databases need their own server, like a big machine that does nothing else. SQLite is small and simple. For Notion Notes, that is plenty.
 
 ### Drizzle — the translator
 
@@ -102,7 +102,7 @@ We have two folders in our database.
 
 ### Folder 1: users
 
-Every person who uses Pagepad gets a card in this folder. The card has these facts:
+Every person who uses Notion Notes gets a card in this folder. The card has these facts:
 
 - **id** — a long string of letters and numbers. This is the user's ID. No two users have the same ID.
 - **token** — another long string. This is like a secret password. The user shows it to prove who they are.
@@ -179,11 +179,11 @@ That whole trip happens in less than a second.
 
 ## Part 7: How we know who you are (without a password)
 
-Most apps make you sign up with an email and a password. Pagepad does not. That was a rule in the plan.
+Most apps make you sign up with an email and a password. Notion Notes does not. That was a rule in the plan.
 
 Here is how it works instead.
 
-The very first time you open Pagepad, the frontend asks the backend for a new token. The backend makes a new user card in the database. The backend gives the frontend the token. The frontend saves the token in the browser's memory, in a spot called **localStorage**.
+The very first time you open Notion Notes, the frontend asks the backend for a new token. The backend makes a new user card in the database. The backend gives the frontend the token. The frontend saves the token in the browser's memory, in a spot called **localStorage**.
 
 After that, every message the frontend sends has the token. The backend uses the token to find the user.
 
@@ -203,7 +203,7 @@ A "door" is an **endpoint**. An endpoint is one thing the backend can do. Here a
 
 Makes a new user and gives back a token.
 
-The frontend calls this the very first time someone opens Pagepad. After that, the frontend uses the saved token.
+The frontend calls this the very first time someone opens Notion Notes. After that, the frontend uses the saved token.
 
 ### Door: GET /me
 
@@ -302,7 +302,7 @@ You should see "18 passed."
 Here is every file in the project. We will say what each one does in one or two sentences.
 
 ```
-pagepad/
+notion-notes/
 ├── package.json          The shopping list. Says what tools we need.
 ├── package-lock.json     The exact list of every tool, frozen in time so
 │                         everyone gets the same versions.
@@ -403,7 +403,7 @@ These are not bad ideas. We skipped them because the goal was to ship in one wee
 
 ## Part 14: Things to know about working together
 
-Since two people are building Pagepad, here are some agreements.
+Since two people are building Notion Notes, here are some agreements.
 
 The frontend and backend talk over the internet. They send messages in **JSON**. JSON is a way to write down information so computers can pass it back and forth. It looks like this:
 
@@ -443,7 +443,7 @@ The backend will not change the doors without telling the frontend. If a door do
 - **npm** — Node Package Manager. Downloads tools for Node.
 - **Port** — A number that says where to find a server on a computer. Like a phone extension. We use port 8787.
 - **PRD** — Product Requirements Document. The written plan for what to build.
-- **REST** — A common style for designing backend doors. Pagepad follows it.
+- **REST** — A common style for designing backend doors. Notion Notes follows it.
 - **Route** — A door's path. Like `/pages` or `/me`.
 - **Schema** — The shape of the database. What folders, what cards, what facts.
 - **SQL** — A language for talking to databases.

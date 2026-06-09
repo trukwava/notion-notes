@@ -8,5 +8,5 @@ const db = createDb(config.databaseUrl);
 const app = buildApp({ db, config });
 
 serve({ fetch: app.fetch, port: config.port }, (info) => {
-  console.log(`Pagepad backend listening on http://localhost:${info.port}`);
+  console.log(`Notion Notes backend listening on http://localhost:${info.port}`);
 });

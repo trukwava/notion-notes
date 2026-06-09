@@ -1,6 +1,6 @@
-# Pagepad Backend
+# Notion Notes Backend
 
-REST API for [Pagepad](./PRD_%20Pagepad%20%E2%80%94%20Net%20New%20Build.docx). Node + Hono + SQLite + Drizzle.
+REST API for Notion Notes. Node + Hono + SQLite + Drizzle.
 
 Frontend ships separately and consumes this API.
 
@@ -20,7 +20,7 @@ Run tests: `npm test`.
 | Var | Default | Notes |
 |-----|---------|-------|
 | `PORT` | `8787` | |
-| `DATABASE_URL` | `./pagepad.db` | SQLite file path |
+| `DATABASE_URL` | `./notion-notes.db` | SQLite file path |
 | `ADMIN_TOKEN` | _(empty)_ | Required to call `/admin/*`. If empty, admin endpoints return 503. |
 | `CORS_ORIGIN` | `*` | Set to the frontend origin in prod, e.g. `http://localhost:5173` |
 | `FREE_PAGE_LIMIT` | `5` | Free-tier page cap |
@@ -28,6 +28,8 @@ Run tests: `npm test`.
 ## Auth model
 
 There are no accounts. On first launch the frontend calls `POST /auth/token`, gets back an opaque device token, and stores it in localStorage. Every subsequent request sends `Authorization: Bearer <token>`. Pages are scoped to the token.
+
+> Note: this product is internally code-named "Notion Notes". The name is provisional; a final brand will be chosen before public launch.
 
 If the token is lost, the user's pages are gone. (Matches the PRD's no-sign-in spirit.)
 
@@ -136,11 +138,11 @@ Liveness check — `{ "status": "ok" }`. No auth.
 
 ```ts
 // On first load
-let token = localStorage.getItem('pagepad-token');
+let token = localStorage.getItem('notion-notes-token');
 if (!token) {
   const res = await fetch(`${API}/auth/token`, { method: 'POST' });
   token = (await res.json()).token;
-  localStorage.setItem('pagepad-token', token);
+  localStorage.setItem('notion-notes-token', token);
 }
 
 // Every request
